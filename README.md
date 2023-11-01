@@ -5,9 +5,6 @@ WHERE updated_date = '2022-01-30 01:58:49';
 	updated_date
 2022-01-30 01:58:49
 
-
-
-
 # Define the start and end dates
 start_date = '2022-01-31'
 end_date = '2022-01-31'
