@@ -3,6 +3,10 @@ FROM loyalty_out_test.prospect_phonepe_leads
 WHERE txn_date = '2022-01-26' AND txn_minute = 1;
 
 
+	updated_date
+2022-01-30 01:58:49
+
+
 
 
 # Define the start and end dates
