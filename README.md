@@ -1,4 +1,8 @@
+# Filter out rows where any tokenized column is empty
+for col in [inputCol + "_tokens" for inputCol in tokenizer_inputs]:
+    sample_df = sample_df.filter(size(col) > 0)
 
+    
 Py4JJavaErrorTraceback (most recent call last)
 <ipython-input-32-76c6fdbbf2ec> in <module>()
      10     hashingTF = HashingTF(inputCol="{}_tokens".format(inputCol), outputCol="{}_tf".format(inputCol))
