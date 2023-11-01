@@ -1,3 +1,11 @@
+# Save the trained models to the current directory
+model_cat1_path = "model_cat1"
+model_cat2_path = "model_cat2"
+
+model_cat1.write().overwrite().save(model_cat1_path)
+model_cat2.write().overwrite().save(model_cat2_path)
+
+
 # Demo_4
 
 from IPython.core.display import HTML,display
