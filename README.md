@@ -1,3 +1,10 @@
+SELECT COUNT(*)
+FROM loyalty_out_test.prospect_phonepe_leads
+WHERE txn_date = '2022-01-26' AND txn_minute = 1;
+
+
+
+
 # Define the start and end dates
 start_date = '2022-01-31'
 end_date = '2022-01-31'
