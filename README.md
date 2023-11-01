@@ -63,3 +63,7 @@ evaluator_cat2 = MulticlassClassificationEvaluator(labelCol="label_cat2", predic
 accuracy_cat2 = evaluator_cat2.evaluate(predictions_cat2)
 print("Accuracy for Category Level 2: %.2f" % accuracy_cat2)
 
+ File "<ipython-input-27-e40999a32156>", line 3
+    hashingTF = HashingTF(inputCol=f"{inputCol}_tokens", outputCol=f"{inputCol}_tf")
+                                                      ^
+SyntaxError: invalid syntax
