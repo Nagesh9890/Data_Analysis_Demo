@@ -8,7 +8,7 @@ import ast
 spark = SparkSession.builder.appName("Classification").getOrCreate()
 
 # Read the CSV file using pandas
-keywords_df = pd.read_csv("/path/to/classification_keywords.csv")
+keywords_df = pd.read_csv("classification_keywords.csv")
 
 # Convert the pandas DataFrame to a dictionary for keyword lookup
 keywords_dict = {}
@@ -46,14 +46,42 @@ category_udf = udf(set_category_levels, schema)
 
 # Define the UDF for classification
 def classify_transaction(benef_ifsc, benef_account_no, source, benef_name):
-    # ... same function as provided earlier ...
+    corporate_keywords = [
+        "pvt ltd", "innovation", "tata", "steel", "industry", "llp",
+        "corporation", "institutional", "tech", "automobiles", "services",
+        "telecommunication", "travels"
+    ]
+    
+    def contains_corporate_keyword(name):
+        return any(keyword in name.lower() for keyword in corporate_keywords)
+    
+    is_corporate = contains_corporate_keyword(benef_name)
+    
+    if benef_ifsc and benef_ifsc.startswith("YESB"):
+        if source == 'current':
+            return 'YBL_Corp'
+        elif source == 'saving':
+            return 'YBL_Ind'
+        elif not source:  # Treat source being None or empty string as needing benef_name check
+            return 'YBL_Corp' if is_corporate else 'YBL_Ind'
+    else:
+        return 'non_ybl_cor' if is_corporate else 'non_ybl_ind'
 
 classify_transaction_udf = udf(classify_transaction, StringType())
 
 # Sample data
 data = [
-    # ... same sample data as provided earlier ...
+    ("John Doe", "Credit Card Payment", "XYZ Corp", "YESB0000001", "123456789012345", "current"),
+    ("Jane Smith", "Shopping at Amazon", "Jane Smith", "HDFC0000001", "1234567890123", "saving"),
+    ("Alice Johnson", "self expense", "Alice Johnson", "YESB0000001", "123456789012345", "saving"),
+    ("Bob Brown", "rtgs transfer", "ACME Corp", "YESB0000001", "123456789012345", "current"),
+    ("Charlie Davis", "taxi rent uber", "Uber Technologies", "ICIC0000001", "1234567890123", "saving"),
+    ("Eve Taylor", "health insurance", "Global Insure", "HDFC0000001", "123456789012345", "")
 ]
+columns = ["remitter_name", "base_txn_text", "benef_name", "benef_ifsc", "benef_account_no", "source"]
+
+# Create the DataFrame
+df = spark.createDataFrame(data, columns)
 columns = ["remitter_name", "base_txn_text", "benef_name", "benef_ifsc", "benef_account_no", "source"]
 
 # Create the DataFrame
@@ -72,4 +100,3 @@ df.show(truncate=False)
 
 # Stop the Spark session
 spark.stop()
-
