@@ -72,7 +72,13 @@ classify_transaction_udf = udf(classify_transaction, StringType())
 
 # Sample data and creating a DataFrame
 data = [
-    # ... your data ...
+    ("HDFC Bank", "Credit Card Payment", "HDFC Bank", "YESB0000001", "123456789012345", "current"),
+    ("Vishal", "Shopping at Amazon", "Amazon", "HDFC0000001", "1234567890123", "saving"),
+    ("Nagesh", "self expense", "nagesh deshmukh", "HDFC0000001", "1234567890123", "saving"),
+    ("Laxita", "rtgs transfer", "tata ltd", "HDFC0000001", "1234567890123", "current"),
+    ("Ragesh", "taxi rent uber", "manish", "YESB0000001", "123456789012345", "saving"),
+    ("Ragesh", "health insuranc", "manish", "YESB0000001", "123456789012345", "saving")
+    # ... other rows ...
 ]
 columns = ["remitter_name", "base_txn_text", "benef_name", "benef_ifsc", "benef_account_no", "source"]
 df = spark.createDataFrame(data, columns)
