@@ -8,7 +8,7 @@ from pyspark.sql.types import StructType, StructField, StringType, BooleanType
 spark = SparkSession.builder.appName("Classification").getOrCreate()
 
 # Read the CSV file using pandas
-keywords_df = pd.read_csv("classification_keywords.csv")
+keywords_df = pd.read_csv("/mnt/data/classification_keywords.csv")
 
 # Convert the pandas DataFrame to a dictionary for keyword lookup
 keywords_dict = {}
@@ -62,12 +62,19 @@ def classify_transaction(benef_ifsc, benef_account_no, source, benef_name):
 classify_transaction_udf = udf(classify_transaction, StringType())
 
 # Define the UDF to check if all words in remitter_name are in benef_name
-# ... (same as before) ...
+def all_words_present(remitter_name, benef_name):
+    remitter_words = set(remitter_name.lower().split(' '))  # Split by space explicitly
+    benef_words = set(benef_name.lower().split(' '))        # Split by space explicitly
+    return remitter_words.issubset(benef_words)
 
 all_words_present_udf = udf(all_words_present, BooleanType())
 
 # Sample data and creating a DataFrame
-# ... (same as before) ...
+data = [
+    # ... (your sample data here) ...
+]
+columns = ["remitter_name", "base_txn_text", "benef_name", "benef_ifsc", "benef_account_no", "source"]
+df = spark.createDataFrame(data, columns)
 
 # Perform the classification and preprocessing
 df = df.withColumn('base_txn_text', preprocess_text_udf(col('base_txn_text')))
@@ -84,3 +91,4 @@ df.show(truncate=False)
 
 # Stop the Spark session
 spark.stop()
+
