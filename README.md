@@ -1,11 +1,24 @@
 
 db_gold.GLD_LIAB_TRANSACTION
+db_gold.GLD_MDM_CUST_POOL
+db_smith.SMTH_POOL_DDISSUE
+db_smith.SMTH_POOL_NACH
+db_smith.SMTH_POOL_SI
+db_smith.smth_pool_base_owchq
+db_smith.smth_pool_rtgs
+db_stage.STG_FCR_FCRLIVE_1_BA_CCY_CODE
+db_stage.STG_FCR_FCRLIVE_1_SM_USER_PROFILE
+The earlier list contained the tables I could identify from the truncated output. Now, with a second look, these additional tables are also involved in the query:
+
+db_smith.SMTH_POOL_DDISSUE: A table that likely contains data regarding demand draft issues.
+db_smith.SMTH_POOL_NACH: This table could be storing information about NACH transactions (National Automated Clearing House).
+db_smith.SMTH_POOL_SI: A table that probably holds data on standing instructions.
+db_smith.smth_pool_base_owchq: Possibly a table for outward cheque transactions.
+db_smith.smth_pool_rtgs: A table for RTGS (Real Time Gross Settlement) transactions.
+The tables include a mix of transaction data, customer profiles, currency codes, and various banking operations like drafts, cheques, and electronic transfers.​
 
 
-
-
-
-
+----------------------
 from pyspark.sql import SparkSession
 import pandas as pd
 import ast
