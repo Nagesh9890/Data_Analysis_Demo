@@ -1,21 +1,25 @@
-
-db_gold.GLD_LIAB_TRANSACTION
-db_gold.GLD_MDM_CUST_POOL
-db_smith.SMTH_POOL_DDISSUE
-db_smith.SMTH_POOL_NACH
-db_smith.SMTH_POOL_SI
-db_smith.smth_pool_base_owchq
-db_smith.smth_pool_rtgs
-db_stage.STG_FCR_FCRLIVE_1_BA_CCY_CODE
-db_stage.STG_FCR_FCRLIVE_1_SM_USER_PROFILE
-The earlier list contained the tables I could identify from the truncated output. Now, with a second look, these additional tables are also involved in the query:
-
-db_smith.SMTH_POOL_DDISSUE: A table that likely contains data regarding demand draft issues.
-db_smith.SMTH_POOL_NACH: This table could be storing information about NACH transactions (National Automated Clearing House).
-db_smith.SMTH_POOL_SI: A table that probably holds data on standing instructions.
-db_smith.smth_pool_base_owchq: Possibly a table for outward cheque transactions.
-db_smith.smth_pool_rtgs: A table for RTGS (Real Time Gross Settlement) transactions.
-The tables include a mix of transaction data, customer profiles, currency codes, and various banking operations like drafts, cheques, and electronic transfers.​
+{'db_gold.GLD_LIAB_TRANSACTION',
+ 'db_gold.GLD_MDM_CUST_POOL',
+ 'db_smith.SMTH_POOL_DC',
+ 'db_smith.SMTH_POOL_DDISSUE',
+ 'db_smith.SMTH_POOL_EPI',
+ 'db_smith.SMTH_POOL_IMPS',
+ 'db_smith.SMTH_POOL_IWCHQ',
+ 'db_smith.SMTH_POOL_NACH',
+ 'db_smith.SMTH_POOL_NEFT',
+ 'db_smith.SMTH_POOL_RTGS',
+ 'db_smith.SMTH_POOL_SI',
+ 'db_smith.SMTH_POOL_UPI',
+ 'db_smith.smth_pool_base_infra_trf',
+ 'db_smith.smth_pool_base_owchq',
+ 'db_smith.smth_pool_esb_ecollect',
+ 'db_smith.smth_pool_rtgs',
+ 'db_stage.STG_FCR_FCRLIVE_1_BA_CCY_CODE',
+ 'db_stage.STG_FCR_FCRLIVE_1_SM_USER_PROFILE',
+ 'db_stage.stg_fcr_fcrlive_1_ba_cc_brn_mast',
+ 'db_stage.stg_fcr_fcrlive_1_xf_ol_st_cotxn_mmdd',
+ 'db_stage.stg_fle_category_master',
+ 'db_stage.stg_fle_txn_mnemonics_master'}
 
 
 ----------------------
