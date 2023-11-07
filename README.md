@@ -1,3 +1,11 @@
+
+db_gold.GLD_LIAB_TRANSACTION
+
+
+
+
+
+
 from pyspark.sql import SparkSession
 import pandas as pd
 import ast
